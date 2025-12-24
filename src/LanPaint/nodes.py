@@ -53,7 +53,7 @@ def reshape_mask(input_mask, output_shape,video_inpainting=False):
         # Handle batch dimension
         mask = repeat_to_batch_size(mask, output_shape[0])
     else:  # Original 2D image case
-        mask = torch.nn.functional.interpolate(input_mask, size=output_shape[-2:], mode=scale_mode)
+        mask = torch.nn.functional.interpolate(input_mask, size=output_shape[-3:], mode=scale_mode)
         if mask.shape[1] < output_shape[1]:
             mask = mask.repeat((1, output_shape[1]) + (1,) * dims)[:,:output_shape[1]]
         mask = repeat_to_batch_size(mask, output_shape[0])
